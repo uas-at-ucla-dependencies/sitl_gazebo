@@ -10,22 +10,27 @@ endif()
 message(STATUS "install-prefix: ${CMAKE_INSTALL_PREFIX}")
 
 project(mavlink_sitl_gazebo VERSION 1.0.0)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+# Set c++11 or higher
+include(EnableC++XX)
+# Set c11
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 include(GNUInstallDirs)
 
 #######################
 ## Find Dependencies ##
 #######################
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-
 option(BUILD_GSTREAMER_PLUGIN "enable gstreamer plugin" ON)
 option(BUILD_ROS_INTERFACE "Enable building ROS dependent plugins" OFF)
 
 option(SEND_VISION_ESTIMATION_DATA "Send Mavlink VISION_POSITION_ESTIMATE msgs" OFF)
 option(SEND_ODOMETRY_DATA "Send Mavlink ODOMETRY msgs" OFF)
-
-# Set c++11 or higher
-include(EnableC++XX)
 
 ## System dependencies are found with CMake's conventions
 find_package(Boost 1.58 REQUIRED COMPONENTS system thread filesystem)
