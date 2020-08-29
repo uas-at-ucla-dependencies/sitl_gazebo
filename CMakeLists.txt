@@ -75,7 +75,10 @@ else()
   include_directories(SYSTEM ${GAZEBO_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS})
 endif()
 
-link_directories(${GAZEBO_LIBRARY_DIRS})
+link_directories(
+  ${GAZEBO_LIBRARY_DIRS}
+  /usr/local/lib
+  )
 
 add_subdirectory( external/OpticalFlow OpticalFlow )
 set( OpticalFlow_LIBS "OpticalFlow" )
